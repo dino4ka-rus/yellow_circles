@@ -1,23 +1,23 @@
 import sys
 
-from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QWidget, QApplication
 
+from ui import Ui_Form
+
 from random import randint
 
-yellow = QColor(255, 255, 0)
 
-
-class Form(QWidget):
+class Form(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Ui.ui', self)
+        self.setupUi(self)
         self.do_paint = False
         self.pushButton.clicked.connect(self.paint)
 
     def draw_circles(self, qp):
-        qp.setBrush(yellow)
+        color = QColor(randint(0, 255), randint(0, 255), randint(0, 255))
+        qp.setBrush(color)
         D = randint(10, 100)
         qp.drawEllipse(randint(0, self.width()), randint(0, self.height()), D, D)
 
